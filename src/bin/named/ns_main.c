@@ -2649,6 +2649,12 @@ nsid_next() {
 	compressed_hash = ((nsid_hash_state >> 16) ^ (nsid_hash_state)) &
 			0xFFFF;
 	if (nsid_algorithm == NSID_SHUFFLE_ONLY) {
+		if (nsid_state == 65535)
+			nsid_state = 0;
+		else
+			nsid_state++;
+		return (nsid_state);
+
 		u_int16_t j;
 
 		/*
